@@ -1,8 +1,8 @@
 #pragma once
 #include "Tree of Strings.h"
 
-//Precondition: takes in a binary tree and a file
-//postcondition: filles the binary tree
+//precondition: takes in a binary tree and a file
+//postcondition: fills the binary tree
 void insert(binary_tree_node<string>*& tree, ifstream& file1)
 {
     string temp;
@@ -31,8 +31,8 @@ void insert(binary_tree_node<string>*& tree, ifstream& file1)
     }
 }
 
-//precondtion: takes a leaft pointer
-//postcondtion: replaces the current pointer with a question and adds the correct animal to the tree
+//precondition: takes a leaf pointer
+//postcondition: replaces the current pointer with a question and adds the correct animal to the tree
 void learn(binary_tree_node<string>* leafptr)
 {
     string guessAnimal;
@@ -40,10 +40,10 @@ void learn(binary_tree_node<string>* leafptr)
     string newQuestion = "[";
 
     guessAnimal = leafptr->getData();
-    correctAnimal += inputString("I can give up. what are you? ", true);
+    correctAnimal += inputString("I give up. what are you? ", true);
     correctAnimal += ")";
     cout << "Please type a yes/no question that will distinguish a " << correctAnimal << " from a " << guessAnimal << "." << endl;
-    newQuestion += inputString("your question and make sure to add a ?: ", true);
+    newQuestion += inputString("Your question and make sure to add a ?: ", true);
     newQuestion += "]";
     leafptr->setData(newQuestion);
     cout << "As, a " << correctAnimal << ", " << newQuestion << endl;
@@ -60,8 +60,8 @@ void learn(binary_tree_node<string>* leafptr)
     }
 }
 
-//precondtion: takes in the current node
-//postcondtion: moves left or right on the binary tree
+//precondition: takes in the current node
+//postcondition: moves left or right on the binary tree
 void askAndMove(binary_tree_node<string>*& currentPtr)
 {
     cout << currentPtr->getData() << endl;
@@ -76,8 +76,8 @@ void askAndMove(binary_tree_node<string>*& currentPtr)
     }
 }
 
-//precondtion: takes in a pointers
-//postcondtion guees the type of animal you are thinking of
+//precondition: takes in a pointer
+//postcondition guess the type of animal you are thinking of
 void play(binary_tree_node<string>* currentPtr)
 {
     cout << "Think of an animal, then press the return key.";
@@ -116,7 +116,7 @@ int GuessingGameMenuOption()
 //driver for the guess animal game
 void startGuessingGame(binary_tree_node<string>*&root, string fileName)
 {
-    //decalre the trunk
+    //declare the trunk
     root = nullptr;
     fileName = "animal.txt";
 
@@ -137,7 +137,7 @@ void startGuessingGame(binary_tree_node<string>*&root, string fileName)
     do
     {
         play(root);
-        yesOrNO = inputStatus("do you want to go again: ", 'Y', 'N');
+        yesOrNO = inputStatus("Do you want to go again: ", 'Y', 'N');
     } while (yesOrNO == 'Y');
     cout << "Thank you for teaching me a thing or two." << endl;
     //print_tree("\t\t", root, false, true, false);
