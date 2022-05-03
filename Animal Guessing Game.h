@@ -113,6 +113,7 @@ int GuessingGameMenuOption()
     return options;
 }
 
+//driver for the guess animal game
 void startGuessingGame(binary_tree_node<string>*&root, string fileName)
 {
     //decalre the trunk
@@ -142,6 +143,9 @@ void startGuessingGame(binary_tree_node<string>*&root, string fileName)
     //print_tree("\t\t", root, false, true, false);
 }
 
+
+//Precondtion: takes in a binary tree and a file
+//Postcondtion: writed the binary tree to the file
 void saveGameFile(binary_tree_node<string>*& root, string fileName)
 {
     print_tree("\t\t", root, false, true, false);
