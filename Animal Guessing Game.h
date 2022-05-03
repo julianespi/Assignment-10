@@ -148,7 +148,15 @@ void startGuessingGame(binary_tree_node<string>*&root, string fileName)
 //Postcondtion: writed the binary tree to the file
 void saveGameFile(binary_tree_node<string>*& root, string fileName)
 {
-    print_tree("\t\t", root, false, true, false);
+    //print_tree("\t\t", root, false, true, false);
+    
+    string fileNameOut = "animalResult.txt";
+    ofstream outFile;
+    outFile.open(fileNameOut);
+
+    write_tree(" ", root, false, true, false, outFile);
+
+    cout << "\n\tCompleted writing the file, " << fileNameOut << ".\n";
 }
 
 //driver for the guess animal game
