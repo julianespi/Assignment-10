@@ -36,13 +36,15 @@ void insert(binary_tree_node<string>*& tree, ifstream& file1)
 void learn(binary_tree_node<string>* leafptr)
 {
     string guessAnimal;
-    string correctAnimal;
-    string newQuestion;
+    string correctAnimal = "(";
+    string newQuestion = "[";
 
     guessAnimal = leafptr->getData();
-    correctAnimal = inputString("I can give up. what are you? ", true);
+    correctAnimal += inputString("I can give up. what are you? ", true);
+    correctAnimal += ")";
     cout << "Please type a yes/no question that will distinguish a " << correctAnimal << " from a " << guessAnimal << "." << endl;
-    newQuestion = inputString("your question: ", true);
+    newQuestion += inputString("your question and make sure to add a ?: ", true);
+    newQuestion += "]";
     leafptr->setData(newQuestion);
     cout << "As, a " << correctAnimal << ", " << newQuestion << endl;
     char yesOrNO = inputStatus("Please answer: ", 'Y', 'N');
@@ -95,12 +97,27 @@ void play(binary_tree_node<string>* currentPtr)
     }
 }
 
-//driver for the guess animal game
-void GuessingGame()
+//Precondition:none
+//PostCondition:displays the main menu
+int GuessingGameMenuOption()
+{
+    cout << endl << "Welcome to Animal Guessing Game";
+    cout << endl << "==========================================";
+    cout << endl << "1> Play the game";
+    cout << endl << "2> Save the game file";
+    cout << endl << "==========================================";
+    cout << endl << "Exit 0";
+    cout << endl << "==========================================" << endl;
+    int options = inputInteger("Options: ", 0, 2);
+    cout << endl << endl << endl;
+    return options;
+}
+
+void startGuessingGame(binary_tree_node<string>*&root, string fileName)
 {
     //decalre the trunk
-    binary_tree_node<string>* root = nullptr;
-    string fileName = "animal.txt";
+    root = nullptr;
+    fileName = "animal.txt";
 
     cout << "loading file..." << endl;
 
@@ -122,7 +139,49 @@ void GuessingGame()
         yesOrNO = inputStatus("do you want to go again: ", 'Y', 'N');
     } while (yesOrNO == 'Y');
     cout << "Thank you for teaching me a thing or two." << endl;
+    //print_tree("\t\t", root, false, true, false);
+}
+
+void saveGameFile(binary_tree_node<string>*& root, string fileName)
+{
     print_tree("\t\t", root, false, true, false);
+}
+
+//driver for the guess animal game
+void GuessingGame()
+{
+    binary_tree_node<string>* root;
+    string fileName;
+    cout << " A game tree for a simple game of 'animal' twenty questions would look like: " << endl << endl
+        << "                                 [ Is it a mammal? ]" << endl
+        << "                                      /         \ " << endl
+        << "                                     /           \ " << endl
+        << "                 [ Does it have stripes? ]     [ Is it a bird? ] " << endl
+        << "                       /       \                  /       \ " << endl
+        << "                      /         \                /         \ " << endl
+        << "                 ( Zebra )    ( Lion )   [ Does it fly? ]  ( Gila monster )" << endl
+        << "                                            /       \ " << endl
+        << "                                           /         \ " << endl
+        << "                                    ( Eagle )     ( Penguin )" << endl << endl
+        << " A learning version of twenty questions: one that not only plays the game, but learns new" << endl
+        << " objects when it loses." << endl;
+
+    do
+    {
+        switch (GuessingGameMenuOption())
+        {
+        case 0: return; break;
+        case 1: startGuessingGame(root, fileName); break;
+        case 2: saveGameFile(root, fileName); break;
+        default: cout << "\t\tERROR - Invalid option. Please re-enter."; break;
+        }
+        cout << "\n";
+        system("pause");
+
+    } while (true);
+
+    
+
 }
 
 
