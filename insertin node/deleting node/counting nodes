@@ -1,0 +1,106 @@
+#include <iostream>
+#include <string>
+
+using std::cout; using std::cin;
+using std::endl; using std::string;
+
+struct ListNodes {
+    struct ListNodes* next{};
+    string data;
+};
+
+struct ListNodes* insertNodes(struct ListNodes* root, string data) {
+    auto new_node = new ListNodes;
+    if (root) {
+        while (root->next)
+            root = root->next;
+
+        new_node->next = nullptr;
+        new_node->data = std::move(data);
+        root->next = new_node;
+
+        return root->next;
+    }
+    new_node->next = nullptr;
+    new_node->data = std::move(data);
+    return new_node;
+}
+
+int deleteNodes(struct ListNodes* root, struct ListNodes* node) {
+    if (node == nullptr || root == nullptr)
+        return EXIT_FAILURE;
+
+    if (root == node) {
+        if (root->next == nullptr) {
+            delete node;
+            root = nullptr;
+            return EXIT_SUCCESS;
+        }
+
+        node = root->next;
+        root->data = root->next->data;
+        root->next = root->next->next;
+        delete node;
+        return EXIT_SUCCESS;
+    }
+
+    auto prev = root;
+    while (prev->next != node && prev->next != nullptr) {
+        prev = prev->next;
+    }
+
+    prev->next = node->next;
+    delete node;
+    return EXIT_SUCCESS;
+}
+
+
+
+//int countNodes(struct ListNode* node, struct ListNode* root)
+//
+//{
+    int counts(struct ListNodes* Node, ListNodes* head, int search_for)
+    {
+        Node* current = head;
+        int count = 0;
+        while (current != NULL) {
+            if (current->data == search_for)
+                count++;
+            current = current->next;
+        }
+        return count;
+    }
+
+
+
+//}
+
+
+
+
+
+void printNodes(struct ListNodes* node) {
+    auto count = 0;
+    while (node) {
+        cout << "node " << count << " - data: " << node->data << endl;
+        node = node->next;
+        count++;
+    }
+}
+
+int main() {
+    struct ListNodes* head = nullptr;
+
+    head = insertNodes(head, "node inserted");
+
+    insertNodes(head, "node in system");
+    printNodes(head);
+    cout << " ----------------------------------- " << endl;
+
+
+    deleteNodes(head, head);
+    printNodes(head);
+    
+}
+
+
