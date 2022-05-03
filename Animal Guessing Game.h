@@ -1,9 +1,8 @@
 #pragma once
 #include "Tree of Strings.h"
-//Create a bass tree that harded coded animals.
-//create a lean function and a ask and move function.
-// if games doents guess your animal use the lear function.
-//left us yes right is no
+
+//Precondition: takes in a binary tree and a file
+//postcondition: filles the binary tree
 void insert(binary_tree_node<string>*& tree, ifstream& file1)
 {
     string temp;
@@ -32,6 +31,8 @@ void insert(binary_tree_node<string>*& tree, ifstream& file1)
     }
 }
 
+//precondtion: takes a leaft pointer
+//postcondtion: replaces the current pointer with a question and adds the correct animal to the tree
 void learn(binary_tree_node<string>* leafptr)
 {
     string guessAnimal;
@@ -57,6 +58,8 @@ void learn(binary_tree_node<string>* leafptr)
     }
 }
 
+//precondtion: takes in the current node
+//postcondtion: moves left or right on the binary tree
 void askAndMove(binary_tree_node<string>*& currentPtr)
 {
     cout << currentPtr->getData() << endl;
@@ -71,6 +74,8 @@ void askAndMove(binary_tree_node<string>*& currentPtr)
     }
 }
 
+//precondtion: takes in a pointers
+//postcondtion guees the type of animal you are thinking of
 void play(binary_tree_node<string>* currentPtr)
 {
     cout << "Think of an animal, then press the return key.";
@@ -90,6 +95,7 @@ void play(binary_tree_node<string>* currentPtr)
     }
 }
 
+//driver for the guess animal game
 void GuessingGame()
 {
     //decalre the trunk
